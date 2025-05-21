@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Technologies: Industry Trends & Market Research</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        **Overall Market Intro:** Text: "The 21st century is witnessing the dawn of a second quantum revolution..." -> Goal: Inform/Hook -> Viz: Large styled text.
+        **QC Market Forecast:** Text: McKinsey $9B 2023, $131B 2040 -> Goal: Change/Compare -> Viz: Bar Chart (Chart.js) -> Justification: Clear visual of market expansion. NO SVG.
+        **QC Fault Tolerance Timelines:** Text: McKinsey 72% by 2035, Nvidia 15-20+ years -> Goal: Compare/Change -> Viz: Horizontal Bar Chart (Chart.js) -> Justification: Easy comparison of expert opinions. NO SVG.
+        **QC Platforms (Table 1.1):** Report table -> Goal: Organize/Compare -> Viz: HTML Table (Tailwind styled) -> Justification: Direct presentation of platform details. NO SVG.
+        **QC Benefits/Risks:** Report lists -> Goal: Inform/Organize -> Viz: Styled HTML lists with Unicode icons (🚀, 🧪, 💹 for benefits; 📉, 🧱, 🛠️ for risks) -> Justification: Clear, scannable information. NO SVG.
+        **PQC Standards (Table 2.1):** Report table -> Goal: Organize/Inform -> Viz: HTML Table (Tailwind styled) -> Justification: Clear presentation of NIST standards. NO SVG.
+        **PQC Adoption Timelines:** Text: CRQCs 10-20 yrs, Gartner unsafe by 2029, NSA mandate 2035 -> Goal: Change/Inform -> Viz: HTML/CSS Timeline (structured divs) -> Justification: Visual progression of key dates. NO SVG.
+        **PQC Benefits/Risks:** Report lists -> Goal: Inform/Organize -> Viz: Styled HTML lists with Unicode icons (🛡️, 📈, ⚖️ for benefits; 🐌, 🧩, 🔬 for risks) -> Justification: Clear, scannable information. NO SVG.
+        **QS Market Forecast:** Text: IDTechEx $2.2B by 2045, McKinsey $6B by 2040 -> Goal: Change/Compare -> Viz: Bar Chart (Chart.js) -> Justification: Visual trend of market size. NO SVG.
+        **QS Types (Table 3.1):** Report table -> Goal: Organize/Inform -> Viz: HTML Table (Tailwind styled) -> Justification: Clear overview of sensor types. NO SVG.
+        **QS Benefits/Risks:** Report lists -> Goal: Inform/Organize -> Viz: Styled HTML lists with Unicode icons (⚕️, 🧭, ⛏️ for benefits; 💔, ⚖️, 💸 for risks) -> Justification: Clear, scannable information. NO SVG.
+        **QI Development Stages (Table 4.1):** Report table -> Goal: Organize/Change -> Viz: HTML Table (Tailwind styled) -> Justification: Staged progression. NO SVG.
+        **QI Benefits/Hurdles:** Report lists -> Goal: Inform/Organize -> Viz: Styled HTML lists with Unicode icons (🔐, 🔗, 📡 for benefits; 📉, 🕸️, 🔗 for hurdles) -> Justification: Clear, scannable information. NO SVG.
+        **QKD Commercial Systems (Table 5.1):** Report table -> Goal: Compare/Inform -> Viz: HTML Table (Tailwind styled) -> Justification: Easy comparison of vendors. NO SVG.
+        **QKD Benefits/Limitations:** Report lists -> Goal: Inform/Organize -> Viz: Styled HTML lists with Unicode icons (🛡️, 🕵️, 📦 for benefits; 📏, ⚙️, 💰 for limitations) -> Justification: Clear, scannable information. NO SVG.
+        **PQC vs. QKD (Table 6.1):** Report table -> Goal: Compare -> Viz: HTML Table (Tailwind styled) -> Justification: Clear side-by-side comparison. NO SVG.
+        **Interdependencies Text:** Report paragraphs -> Goal: Inform/Organize -> Viz: Styled text blocks and lists. NO SVG.
+        **Conclusion Summary:** Report text -> Goal: Inform -> Viz: Styled text block. NO SVG.
+    -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F7F7F7; color: #333333; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; max-height: 450px;} }
+        .stat-card { background-color: #FFFFFF; border-left: 5px solid #FF6B6B; }
+        .benefit-list li::before { content: "✅"; color: #4ECDC4; margin-right: 0.5rem; }
+        .risk-list li::before { content: "⚠️"; color: #FF6B6B; margin-right: 0.5rem; }
+        .timeline-item { border-left: 3px solid #45B7D1; margin-left: 1rem; padding-left: 1.5rem; position: relative; }
+        .timeline-item::before { content: ""; width: 1rem; height: 1rem; background-color: #45B7D1; border-radius: 50%; position: absolute; left: -0.6rem; top: 0.1rem; border: 3px solid #F7F7F7;}
+        .table-header { background-color: #4ECDC4; color: white; }
+        .section-title { color: #FF6B6B; border-bottom: 2px solid #4ECDC4; padding-bottom: 0.5rem;}
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-md py-6">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold text-gray-800">Quantum Technologies</h1>
+            <p class="text-xl text-gray-600 mt-2">Industry Trends & Market Research Analysis</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="intro" class="mb-16">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-semibold section-title mb-6">The Dawn of the Second Quantum Revolution</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    The 21st century is witnessing a profound shift as quantum mechanics transitions from theoretical concepts to a suite of transformative technologies. This infographic explores five pivotal areas: Quantum Computing (QC), Post-Quantum Cryptography (PQC), Quantum Sensors (QS), the Quantum Internet (QI), and Quantum Key Distribution (QKD). We delve into their current state, commercial viability, potential benefits, and inherent risks, offering a comprehensive view of this burgeoning ecosystem.
+                </p>
+            </div>
+        </section>
+
+        <section id="qc" class="mb-16">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-semibold section-title mb-6">⚙️ Quantum Computing (QC): The Next Computational Frontier</h2>
+                <p class="text-lg text-gray-700 mb-6">QC leverages quantum mechanics for calculations beyond classical supercomputers, promising revolutions in science, finance, and AI. Current systems are primarily Noisy Intermediate-Scale Quantum (NISQ) devices.</p>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="stat-card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Market Projection (McKinsey)</h3>
+                        <p class="text-3xl font-bold text-gray-800">$9B <span class="text-lg font-normal">(2023)</span> ➔ $131B <span class="text-lg font-normal">(2040)</span></p>
+                        <div class="chart-container mt-4">
+                            <canvas id="qcMarketChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Illustrates significant projected growth in the QC market.</p>
+                    </div>
+                    <div class="stat-card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Fault Tolerance Timelines</h3>
+                         <div class="chart-container mt-4">
+                            <canvas id="qcFaultToleranceChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Expert opinions vary, with many expecting fault tolerance by 2035, while some foresee a longer horizon.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Key Platforms & Players</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table class="min-w-full bg-white">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="py-3 px-4 text-left">Platform Type</th>
+                                <th class="py-3 px-4 text-left">Key Characteristics</th>
+                                <th class="py-3 px-4 text-left">Major Entities</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="border py-3 px-4">Superconducting Circuits</td><td class="border py-3 px-4">Fast gates, cryogenic, noise-sensitive</td><td class="border py-3 px-4">IBM, Google, Rigetti</td></tr>
+                            <tr><td class="border py-3 px-4">Trapped Ions</td><td class="border py-3 px-4">Long coherence, high fidelity, slower gates</td><td class="border py-3 px-4">IonQ, Quantinuum</td></tr>
+                            <tr><td class="border py-3 px-4">Photonics</td><td class="border py-3 px-4">Room temp, probabilistic gates</td><td class="border py-3 px-4">PsiQuantum, Xanadu</td></tr>
+                            <tr><td class="border py-3 px-4">Neutral Atoms</td><td class="border py-3 px-4">Scalable, Rydberg interactions</td><td class="border py-3 px-4">Atom Computing, Pasqal</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-sm text-gray-600 mb-6">Diverse platforms are being explored, each with unique advantages and challenges in the race to build scalable quantum computers.</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Potential Benefits</h3>
+                        <ul class="benefit-list list-none space-y-2 text-gray-700">
+                            <li>Accelerated Big Data Analysis</li>
+                            <li>Revolutionized Drug & Material Discovery</li>
+                            <li>Advanced Financial Modeling & AI</li>
+                            <li>Optimized Logistics & Supply Chains</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Associated Risks</h3>
+                        <ul class="risk-list list-none space-y-2 text-gray-700">
+                            <li>Decoherence and Noise in Qubits</li>
+                            <li>Qubit Stability & Scalability Challenges</li>
+                            <li>Breaking Current Cryptography (RSA, ECC)</li>
+                            <li>"Harvest Now, Decrypt Later" Attacks</li>
+                        </ul>
+                    </div>
+                </div>
+                 <p class="text-sm text-gray-600 mt-4">While QC offers transformative benefits, it also presents significant technical hurdles and security implications, notably the threat to existing encryption standards.</p>
+            </div>
+        </section>
+
+        <section id="pqc" class="mb-16">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-semibold section-title mb-6">🛡️ Post-Quantum Cryptography (PQC): Securing the Future</h2>
+                <p class="text-lg text-gray-700 mb-6">PQC aims to develop algorithms secure against both classical and quantum computers, addressing the cryptographic threat from QC. NIST is leading standardization efforts.</p>
+
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">NIST PQC Standards (Finalized Aug 2024)</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table class="min-w-full bg-white">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="py-3 px-4 text-left">Algorithm (Basis)</th>
+                                <th class="py-3 px-4 text-left">NIST Standard</th>
+                                <th class="py-3 px-4 text-left">Type</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="border py-3 px-4">CRYSTALS-KYBER</td><td class="border py-3 px-4">FIPS 203</td><td class="border py-3 px-4">Key Encapsulation (ML-KEM)</td></tr>
+                            <tr><td class="border py-3 px-4">CRYSTALS-Dilithium</td><td class="border py-3 px-4">FIPS 204</td><td class="border py-3 px-4">Digital Signature (ML-DSA)</td></tr>
+                            <tr><td class="border py-3 px-4">SPHINCS+</td><td class="border py-3 px-4">FIPS 205</td><td class="border py-3 px-4">Digital Signature (SLH-DSA)</td></tr>
+                            <tr><td class="border py-3 px-4">FALCON</td><td class="border py-3 px-4">FIPS 206 (Draft Soon)</td><td class="border py-3 px-4">Digital Signature</td></tr>
+                             <tr><td class="border py-3 px-4">HQC</td><td class="border py-3 px-4">Standardization Selected (Final by 2027)</td><td class="border py-3 px-4">Key Encapsulation (Backup)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <p class="text-sm text-gray-600 mb-6">NIST's finalized standards provide a crucial foundation for migrating to quantum-resistant security.</p>
+
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">PQC Adoption Timeline & Urgency</h3>
+                <div class="space-y-4 mb-6">
+                    <div class="timeline-item"><p class="font-semibold">CRQCs Emerge: <span class="font-normal text-gray-600">Next 10-20 years (Expert Est.)</span></p></div>
+                    <div class="timeline-item"><p class="font-semibold">RSA/ECC Unsafe: <span class="font-normal text-gray-600">By 2029 (Gartner)</span></p></div>
+                    <div class="timeline-item"><p class="font-semibold">US Federal Mandate: <span class="font-normal text-gray-600">Switch by 2035 (NSA)</span></p></div>
+                    <div class="timeline-item"><p class="font-semibold">Hybrid Approach: <span class="font-normal text-gray-600">Recommended for transition</span></p></div>
+                </div>
+                <p class="text-sm text-gray-600 mb-6">The race is on to adopt PQC before quantum computers can break current encryption, with HNDL attacks posing an immediate threat.</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Key Benefits</h3>
+                        <ul class="benefit-list list-none space-y-2 text-gray-700">
+                            <li>Future-Proofs Data Security</li>
+                            <li>Maintains Business Continuity</li>
+                            <li>Ensures Regulatory Compliance</li>
+                            <li>Preserves Customer Trust</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Challenges</h3>
+                        <ul class="risk-list list-none space-y-2 text-gray-700">
+                            <li>Performance (Larger Keys/Signatures)</li>
+                            <li>Implementation Complexity & Cost</li>
+                            <li>Algorithm Maturity & Auditing</li>
+                            <li>Organizational Readiness & Inertia</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4">PQC is vital for long-term data protection but faces challenges in performance, cost, and the complexity of migration.</p>
+            </div>
+        </section>
+
+        <section id="qs" class="mb-16">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-semibold section-title mb-6">🔬 Quantum Sensors (QS): Revolutionizing Measurement</h2>
+                <p class="text-lg text-gray-700 mb-6">QS use quantum mechanics for unprecedented precision, detecting faint signals beyond classical sensor capabilities, with applications in healthcare, navigation, and resource exploration.</p>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                     <div class="stat-card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Market Projections</h3>
+                         <div class="chart-container mt-4">
+                            <canvas id="qsMarketChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Significant growth is expected, driven by demand for higher performance across various sectors.</p>
+                    </div>
+                    <div class="stat-card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Diverse Modalities</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                            <li>Atomic Clocks (CSACs)</li>
+                            <li>Magnetometers (SQUIDs, OPMs, NV Centers)</li>
+                            <li>Gravimeters & Gyroscopes (Atom Interferometry)</li>
+                            <li>Quantum Imaging (Quantum OCT)</li>
+                            <li>Quantum Biosensors</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-3">A wide array of sensor types are emerging, leveraging distinct quantum phenomena.</p>
+                    </div>
+                </div>
+
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Sector-Specific Benefits</h3>
+                        <ul class="benefit-list list-none space-y-2 text-gray-700">
+                            <li>Healthcare: Early disease detection, nanoscale MRI</li>
+                            <li>Navigation: GPS-independent inertial navigation</li>
+                            <li>Resource Exploration: Precise underground mapping</li>
+                            <li>Defense: Enhanced signal intelligence</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Key Risks</h3>
+                        <ul class="risk-list list-none space-y-2 text-gray-700">
+                            <li>Fragility & Environmental Sensitivity</li>
+                            <li>Size, Weight, and Power (SWaP) constraints</li>
+                            <li>High Complexity and Cost</li>
+                            <li>Scalability & Standardization Gaps</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4">Quantum sensors offer transformative advantages but face hurdles in cost, robustness, and scaling for widespread adoption.</p>
+            </div>
+        </section>
+
+        <section id="qi" class="mb-16">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-semibold section-title mb-6">🌐 Quantum Internet (QI): Fabric of Entangled Communication</h2>
+                <p class="text-lg text-gray-700 mb-6">The QI aims to transmit qubits using entanglement for secure communication, distributed QC, and networked sensing. It's in nascent stages, heavily reliant on quantum repeater and memory breakthroughs.</p>
+
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Development Stages & Timelines</h3>
+                 <div class="overflow-x-auto mb-6">
+                    <table class="min-w-full bg-white">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="py-3 px-4 text-left">Stage (Conceptual)</th>
+                                <th class="py-3 px-4 text-left">Key Capabilities</th>
+                                <th class="py-3 px-4 text-left">Primary Applications</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="border py-3 px-4">1: Trusted Repeater</td><td class="border py-3 px-4">Secure key exchange (point-to-point)</td><td class="border py-3 px-4">QKD, QRNG</td></tr>
+                            <tr><td class="border py-3 px-4">2: Entanglement Distribution</td><td class="border py-3 px-4">Metro distance entanglement</td><td class="border py-3 px-4">Device-Independent QKD</td></tr>
+                            <tr><td class="border py-3 px-4">3: Quantum Memory Networks</td><td class="border py-3 px-4">Longer distance (1st gen repeaters)</td><td class="border py-3 px-4">Basic distributed QC</td></tr>
+                            <tr><td class="border py-3 px-4">4: Few-Qubit Fault-Tolerant</td><td class="border py-3 px-4">Limited QEC, robust entanglement</td><td class="border py-3 px-4">Complex distributed algorithms</td></tr>
+                            <tr><td class="border py-3 px-4">5: Full QI</td><td class="border py-3 px-4">Scalable, fault-tolerant networks</td><td class="border py-3 px-4">Full distributed QC</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-sm text-gray-600 mb-6">General expert opinion: Large-scale repeater network 10+ years away. Global QI market projected at $8.1B by 2030.</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Potential Benefits</h3>
+                        <ul class="benefit-list list-none space-y-2 text-gray-700">
+                            <li>Ultra-Secure Communication (QKD, advanced crypto)</li>
+                            <li>Distributed Quantum Computing</li>
+                            <li>Networked Quantum Sensing (enhanced precision)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Hurdles to Realization</h3>
+                        <ul class="risk-list list-none space-y-2 text-gray-700">
+                            <li>Decoherence & Qubit Fragility</li>
+                            <li>Scalability to Global Networks</li>
+                            <li>Quantum Repeater & Memory Development</li>
+                            <li>High Cost of Specialized Hardware</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4">The QI's ability to distribute entanglement is key, but overcoming hardware challenges like quantum repeaters is critical for its realization.</p>
+            </div>
+        </section>
+
+        <section id="qkd" class="mb-16">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-semibold section-title mb-6">🔑 Quantum Key Distribution (QKD): Provably Secure Keys</h2>
+                <p class="text-lg text-gray-700 mb-6">QKD is the most mature quantum communication app, using quantum mechanics to establish secret keys secure against even quantum computers. Commercial systems are available.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="stat-card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Market Size (Dominated by QKD)</h3>
+                        <p class="text-3xl font-bold text-gray-800">$1.1B <span class="text-lg font-normal">(2023)</span> ➔ $8.6B <span class="text-lg font-normal">(2032 Est.)</span></p>
+                         <p class="text-sm text-gray-600 mt-2">Growth driven by high-security needs in government, finance, and critical infrastructure.</p>
+                    </div>
+                     <div class="stat-card rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Key Principles</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 mt-2">
+                            <li>Quantum State Encoding (e.g., photon polarization)</li>
+                            <li>No-Cloning Theorem</li>
+                            <li>Measurement Disturbs System</li>
+                            <li>Key Sifting & Reconciliation</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-3">Security is based on physics, not computational difficulty.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Commercial QKD System Examples</h3>
+                 <div class="overflow-x-auto mb-6">
+                    <table class="min-w-full bg-white">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="py-3 px-4 text-left">Vendor</th>
+                                <th class="py-3 px-4 text-left">Typical Key Rate</th>
+                                <th class="py-3 px-4 text-left">Max Distance (Direct Fiber)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="border py-3 px-4">ID Quantique</td><td class="border py-3 px-4">kbps-Mbps</td><td class="border py-3 px-4">~100-150 km</td></tr>
+                            <tr><td class="border py-3 px-4">Toshiba</td><td class="border py-3 px-4">kbps-Mbps</td><td class="border py-3 px-4">Up to ~150 km</td></tr>
+                            <tr><td class="border py-3 px-4">QuantumCTek</td><td class="border py-3 px-4">Varies</td><td class="border py-3 px-4">Terrestrial, Satellite</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-sm text-gray-600 mb-6">Several vendors offer QKD solutions, primarily for niche, high-security applications.</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Core Benefits</h3>
+                        <ul class="benefit-list list-none space-y-2 text-gray-700">
+                            <li>Quantum-Safe Security for Keys</li>
+                            <li>Real-Time Eavesdropping Detection</li>
+                            <li>Protection Against HNDL Attacks</li>
+                            <li>Securing High-Value Data Links</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-3">Significant Limitations</h3>
+                        <ul class="risk-list list-none space-y-2 text-gray-700">
+                            <li>Distance Limitations (needs trusted relays/repeaters)</li>
+                            <li>Special Purpose Equipment & High Cost</li>
+                            <li>Requires Classical Authentication (PQC needed)</li>
+                            <li>Hardware Vulnerabilities & DoS Risk</li>
+                        </ul>
+                    </div>
+                </div>
+                 <p class="text-sm text-gray-600 mt-4">QKD offers unique security for key exchange but is limited by distance, cost, and infrastructure needs. Satellite QKD is an emerging solution for distance.</p>
+            </div>
+        </section>
+
+        <section id="interconnections" class="mb-16">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-semibold section-title mb-6">🔗 Interconnections & Future Outlook</h2>
+                <p class="text-lg text-gray-700 mb-6">Quantum technologies form an interconnected ecosystem. QC's threat drives PQC/QKD. PQC secures classical channels for QKD/QI. QI connects QCs and sensors. Sensor advances aid other quantum systems.</p>
+
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">PQC vs. QKD: Complementary Security</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table class="min-w-full bg-white">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="py-3 px-4 text-left">Feature</th>
+                                <th class="py-3 px-4 text-left">PQC</th>
+                                <th class="py-3 px-4 text-left">QKD</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr><td class="border py-3 px-4">Security Basis</td><td class="border py-3 px-4">Computational Hardness</td><td class="border py-3 px-4">Quantum Mechanics</td></tr>
+                            <tr><td class="border py-3 px-4">Scalability</td><td class="border py-3 px-4">High (Software)</td><td class="border py-3 px-4">Limited (Hardware, Distance)</td></tr>
+                            <tr><td class="border py-3 px-4">Eavesdropping Detection</td><td class="border py-3 px-4">No (Generally)</td><td class="border py-3 px-4">Yes (Real-time)</td></tr>
+                            <tr><td class="border py-3 px-4">Primary Role</td><td class="border py-3 px-4">Broad Crypto Replacement</td><td class="border py-3 px-4">Secure Key Exchange for Specific Links</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-sm text-gray-600 mb-6">PQC offers broad, software-upgradable security, while QKD provides eavesdropping detection for high-value links. They are likely complementary.</p>
+
+                <h3 class="text-2xl font-semibold text-gray-700 mb-4">Future Outlook & Strategy</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4 leading-relaxed">
+                    <li><strong>QC:</strong> Long-term (10-20 yrs for FTQC), immediate crypto threat.</li>
+                    <li><strong>PQC:</strong> Immediate defense, critical 10-15 yr adoption window.</li>
+                    <li><strong>QS:</strong> Closest to broad impact (5-15 yrs), focus on miniaturization/cost.</li>
+                    <li><strong>QI:</strong> Longer-term (15-25+ yrs), depends on repeater/memory tech.</li>
+                    <li><strong>QKD:</strong> Niche now, complementary to PQC, satellite QKD promising.</li>
+                </ul>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Successfully navigating the quantum future requires sustained R&D, standardization, workforce development, public-private partnerships, and proactive ethical considerations. Understanding these interdependencies is vital for harnessing benefits while mitigating risks.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-8 mt-12">
+        <p>&copy; 2025 Quantum Technology Insights. Infographic based on "Quantum Technologies" Report.</p>
+        <p class="text-sm text-gray-400 mt-1">Data sources as per original report. Visualizations for illustrative purposes.</p>
+    </footer>
+
+    <script>
+        const CHART_PRIMARY_COLOR = '#4ECDC4'; // Turquoise
+        const CHART_SECONDARY_COLOR = '#FF6B6B'; // Coral Red
+        const CHART_TERTIARY_COLOR = '#45B7D1'; // Sky Blue
+        const CHART_TEXT_COLOR = '#333333';
+
+        function processLabels(labels) {
+            return labels.map(label => {
+                if (typeof label === 'string' && label.length > 16) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = '';
+                    for (const word of words) {
+                        if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                            lines.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine += word + ' ';
+                        }
+                    }
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            });
+        }
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { color: CHART_TEXT_COLOR, font: { size: 12 } }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    },
+                    titleFont: { size: 14 },
+                    bodyFont: { size: 12 },
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                    titleColor: '#FFFFFF',
+                    bodyColor: '#FFFFFF',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: CHART_TEXT_COLOR, font: { size: 10 } },
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                x: {
+                    ticks: { color: CHART_TEXT_COLOR, font: { size: 10 } },
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                }
+            }
+        };
+        
+        const commonHorizontalChartOptions = { ...commonChartOptions, indexAxis: 'y' };
+
+
+        function initQCMarketChart() {
+            const ctx = document.getElementById('qcMarketChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['2023', '2040 (Projected by McKinsey)']),
+                    datasets: [{
+                        label: 'QC Market Value (USD Billion)',
+                        data: [9, 131],
+                        backgroundColor: [CHART_PRIMARY_COLOR, CHART_SECONDARY_COLOR],
+                        borderColor: [CHART_PRIMARY_COLOR, CHART_SECONDARY_COLOR],
+                        borderWidth: 1
+                    }]
+                },
+                options: commonChartOptions
+            });
+        }
+        
+        function initQCFaultToleranceChart() {
+            const ctx = document.getElementById('qcFaultToleranceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['Experts: By 2035 (72%)', 'Nvidia CEO: 15-20+ Years']),
+                    datasets: [{
+                        label: 'Fault Tolerance Expectation',
+                        data: [72, 85], // Using a representative value for the bar length for Nvidia
+                        backgroundColor: [CHART_PRIMARY_COLOR, CHART_TERTIARY_COLOR],
+                        borderColor: [CHART_PRIMARY_COLOR, CHART_TERTIARY_COLOR],
+                        borderWidth: 1
+                    }]
+                },
+                options: { ...commonHorizontalChartOptions, plugins: { ...commonHorizontalChartOptions.plugins, tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) { /* ... default title ... */
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) { return label.join(' '); }
+                            return label;
+                         },
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) { label += ': '; }
+                            if (context.label.includes('Nvidia')) {
+                                return 'Nvidia CEO: 15-20+ more years away';
+                            }
+                            return label + context.parsed.x + '% of experts';
+                        }
+                    }
+                }}}
+            });
+        }
+
+        function initQSMarketChart() {
+            const ctx = document.getElementById('qsMarketChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['IDTechEx 2045 ($2.2B)', 'McKinsey 2040 ($6B)']),
+                    datasets: [{
+                        label: 'QS Market Value (USD Billion)',
+                        data: [2.2, 6],
+                        backgroundColor: [CHART_PRIMARY_COLOR, CHART_SECONDARY_COLOR],
+                        borderColor: [CHART_PRIMARY_COLOR, CHART_SECONDARY_COLOR],
+                        borderWidth: 1
+                    }]
+                },
+                options: commonChartOptions
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            if(document.getElementById('qcMarketChart')) initQCMarketChart();
+            if(document.getElementById('qcFaultToleranceChart')) initQCFaultToleranceChart();
+            if(document.getElementById('qsMarketChart')) initQSMarketChart();
+        });
+    </script>
+</body>
+</html>
